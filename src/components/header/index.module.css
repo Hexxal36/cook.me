@@ -1,0 +1,30 @@
+.main-nav {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100px;
+    margin: 5px 0;
+}
+
+.main-nav li {
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 7px;
+    width: 22px;
+}
+
+.main-nav li:hover {
+    background-color: rgb(153, 153, 241);
+}
+
+.main-nav li a{
+    text-decoration: none;
+    color: black;
+}
+
+header {
+    display: flex;
+    justify-content: left;
+    background-color: rgb(209, 242, 253);
+}
