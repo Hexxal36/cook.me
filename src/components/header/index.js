@@ -1,13 +1,17 @@
 import React from 'react'
-import Link from '../link'
+import IconLink from '../icon-link'
 import styles from './index.module.css'
 
 const Header = () => {
     return (
         <header>
             <ul className={styles["main-nav"]}>
-                <Link href="#" iconName="home" />
-                <Link href="#" iconName="search" />
+                <li>
+                    <IconLink href="#" iconName="home" />
+                </li>
+                <li>
+                    <IconLink href="#" iconName="search" />
+                </li>
             </ul>
         </header>
     )

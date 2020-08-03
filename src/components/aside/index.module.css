@@ -1,0 +1,15 @@
+aside {
+    background-color: rgb(186, 216, 226);
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    min-width: 200px;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+}
+
+.profile-container {
+    height: 50%;
+    place-items: center;
+}
