@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './components/header'
 import Aside from './components/aside'
-import ItemCard from './components/item-card'
+import CardStack from './components/card-stack'
 import styles from './app.module.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -16,7 +16,7 @@ function App() {
       <div className={styles.container}>
         <Aside />
         <div className={styles["page-container"]}>
-          <ItemCard />
+          <CardStack />
         </div>
       </div>
     </div>
