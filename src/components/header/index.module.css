@@ -3,8 +3,8 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 100px;
     margin: 5px 0;
+    padding: 0 6vh;
 }
 
 .main-nav li {
@@ -12,6 +12,7 @@
     border-radius: 20px;
     padding: 7px;
     width: 22px;
+    margin: 0 2vh;
 }
 
 .main-nav li:hover {
@@ -27,4 +28,13 @@ header {
     display: flex;
     justify-content: left;
     background-color: rgb(209, 242, 253);
+}
+
+.right-nav {
+    display: flex;
+    max-width: 200px;
+}
+
+.left-nav {
+    float: left;
 }
