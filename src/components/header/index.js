@@ -1,20 +1,44 @@
-import React from 'react'
+import React, { Component } from 'react'
 import IconLink from '../icon-link'
 import styles from './index.module.css'
+import getNavigation from '../../utils/navigation'
+import UserContext from '../../Context'
 
-const Header = () => {
-    return (
-        <header>
-            <ul className={styles["main-nav"]}>
-                <li>
-                    <IconLink href="#" iconName="home" />
-                </li>
-                <li>
-                    <IconLink href="#" iconName="search" />
-                </li>
-            </ul>
-        </header>
-    )
+
+
+
+class Header extends Component {
+
+    static contextType = UserContext
+
+    render() {
+        const {
+            user
+        } = this.context
+            
+        const links = getNavigation(user)
+
+        return (
+            <header>
+                <ul className={styles["main-nav"]}>
+                    <div className={styles["right-nav"]}>
+                        {
+                            links.map(navElement => {
+                                return (
+                                <li>
+                                    <IconLink
+                                        href={navElement.link}
+                                        iconName={navElement.iconName}
+                                    />
+                                </li>
+                                )
+                            })
+                        }
+                    </div>
+                </ul>
+            </header>
+        )
+    }
 }
 
 export default Header

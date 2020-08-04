@@ -15,7 +15,7 @@ module.exports = {
             models.User.create({ username, password })
                 .then((createdUser) => {
                   const token = utils.jwt.createToken({ id: createdUser._id });
-                  res.cookie(config.authCookieName, token).send(user);
+                  res.header("Authorization", token).send(createdUser);
                 })
                 .catch((err) => {
 
@@ -24,7 +24,7 @@ module.exports = {
         },
 
         verifyLogin: (req, res, next) => {
-          const token = req.header(config.authCookieName) || '';
+          const token = req.headers.authorization || '';
 
           Promise.all([
               utils.jwt.verifyToken(token),
@@ -64,7 +64,7 @@ module.exports = {
                     }
 
                     const token = utils.jwt.createToken({ id: user._id });
-                    res.cookie(config.authCookieName, token).send(user);
+                    res.header("Authorization", token).send(user);
                 })
                 .catch(next);
         },

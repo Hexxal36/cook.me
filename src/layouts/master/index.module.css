@@ -1,0 +1,13 @@
+.container {
+  min-height: 100%;
+  display: flex;
+}
+
+.page-container {
+  width: 85%;
+  height: 100%;
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  overflow: auto;
+}

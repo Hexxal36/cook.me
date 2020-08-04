@@ -1,0 +1,17 @@
+.submit-input input {
+    border: 1px solid #3498db;
+    background: none;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.8s;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-input input:hover {
+    color: #fff;
+    background: #3498db;
+}

@@ -1,0 +1,21 @@
+.page-container form {
+    width: 35%;
+}
+
+.title {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.register-redirect {
+    margin-top: 10px;
+}
+
+.register-redirect a {
+    text-decoration: none;
+    color: #3498db;
+}
+
+.register-redirect a:hover{
+    color: #44b4ff;
+}

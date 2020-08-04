@@ -1,26 +1,69 @@
-import React from 'react';
-import Header from './components/header'
-import Aside from './components/aside'
-import CardStack from './components/card-stack'
-import styles from './app.module.css';
+import React, { useState, useEffect } from 'react'
+import UserContext from './Context'
+import getCookie from './utils/cookie'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faHome, faSearch } from '@fortawesome/free-solid-svg-icons'
+const App = (props) => {
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-library.add(faHome, faSearch)
+  const logIn = (user) => {
+    setUser({
+      ...user,
+      loggedIn: true
+    })
+  }
 
-function App() {
+  const logOut = () => {
+    document.cookie = "x-auth-token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    setUser({
+      loggedIn: false
+    })
+  }
+
+  useEffect(() => {
+    const token = getCookie('x-auth-token')
+    if(!token) {
+      logOut()
+      setLoading(false)
+      return
+    }
+
+    fetch('http://localhost:9999/api/user/verify', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    }).then(promise => {
+      return promise.json()
+    }).then(response => {
+      if(response.status) {
+        logIn({
+          username: response.user.username,
+          id: response.user._id
+        })
+      } else {
+        logOut()
+      }
+      setLoading(false)
+    })
+  }, [])
+
+  if (loading) {
+    return (
+      <div>Loading....</div>
+    )
+  }
+
   return (
-    <div className="App">
-      <Header />
-      <div className={styles.container}>
-        <Aside />
-        <div className={styles["page-container"]}>
-          <CardStack />
-        </div>
-      </div>
-    </div>
-  );
+    <UserContext.Provider value={{
+      user,
+      logIn,
+      logOut
+    }}>
+      {props.children}
+    </UserContext.Provider>
+  )
 }
 
-export default App;
+export default App
