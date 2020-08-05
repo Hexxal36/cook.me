@@ -7,6 +7,10 @@ export default [
         component: RecipeForm,
     },
     {
+        path: '/recipe/edit/:id',
+        component: RecipeForm,
+    },
+    {
         path: '/recipe/:id',
         component: RecipeShow,
     }

@@ -1,53 +1,102 @@
-import React, { useState } from 'react'
+import React, { useState, Component } from 'react'
 import PageLayout from '../../../layouts/master'
 import TextBox from '../../../components/text-box'
 import FormTitle from '../../../components/form-title'
 import Submit from '../../../components/submit-btn'
-import getCookie from '../../../utils/cookie'
+import recipes from '../../../utils/recipe'
 
 import { useHistory } from "react-router-dom"
 
 import styles from './index.module.css'
 
-const RecipeForm = () => {
-  const history = useHistory()
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [time, setTime] = useState('')
+class RecipeForm extends Component {
+  constructor(props) {
+    super(props)
+
+    this.isEdit = this.props.match.params.id !== undefined
+
+    this.state = {
+      title : '',
+      time: '',
+      description: ''
+    }
+  }
   
-  const handleSubmit = async (event) => {
-    event.preventDefault()
+  componentDidMount = async () => {
+    if (this.isEdit) {
+      console.log('y');
+      const recipe = await recipes.getRecipe(this.props.match.params.id)
 
-    await fetch('http://localhost:9999/api/recipe', {
-      method: 'POST',
-      body: JSON.stringify({
-        title: title,
-        description: description,
-        time:time
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        'x-auth-token': getCookie('x-auth-token')
-      }
-    })
+      await this.setState({
+        title: recipe.title,
+        time: recipe.time,
+        description: recipe.description
+      })
+      console.log(this.state);
+    }
+  }
+  
+  onChange = (event, type) => {
+    const newState = {}
+    newState[type] = event.target.value
 
-    history.push('/')
+    this.setState(newState)
   }
 
-  return (
-    <PageLayout>
-        <div className={styles["form-container"]}>
-          <FormTitle value="Create a recipe" />
-          <form onSubmit={handleSubmit}>
-            <TextBox label="Title" onChange={e => setTitle(e.target.value)} />
-            <TextBox label="Description"  onChange={e => setDescription(e.target.value)}/>
-            <TextBox label="Time (min)" type="number"  onChange={e => setTime(e.target.value)}/>
+  editRecipe = async (event) => {
+    event.preventDefault()
 
-            <Submit value="Create"/>
-          </form>
-        </div>
-    </PageLayout>
-  )
+    const id = this.props.match.params.id
+    await recipes.editRecipe( {
+      id: this.props.match.params.id,
+      title: this.state.title,
+      time: this.state.time,
+      description: this.state.description
+    } )
+
+    this.props.history.push(`/recipe/${this.props.match.params.id}`)
+  }
+
+  createRecipe = async (event) => {
+    event.preventDefault()
+
+    await recipes.createRecipe( {
+      title: this.state.title,
+      time: this.state.time,
+      description: this.state.description
+    } )
+
+    this.props.history.push('/')
+  }
+
+  render(){
+    return (
+      <PageLayout>
+          <div className={styles["form-container"]}>
+            <FormTitle value={this.isEdit ? "Edit a recipe" : "Create a recipe"} />
+            <form onSubmit={this.isEdit ? this.editRecipe : this.createRecipe}>
+              <TextBox 
+                label="Title" 
+                onChange={e => this.onChange(e, 'title')}
+                value={this.state.title}
+              />
+              <TextBox 
+                label="Description"  
+                onChange={e => this.onChange(e, 'description')}
+                value={this.state.description}
+              />
+              <TextBox 
+                label="Time (min)" 
+                type="number"  
+                onChange={e => this.onChange(e, 'time')}
+                value={this.state.time}
+              />
+              <Submit value={this.isEdit ? "Edit" : "Create"}/>
+            </form>
+          </div>
+      </PageLayout>
+    )
+  }
 }
 
 export default RecipeForm

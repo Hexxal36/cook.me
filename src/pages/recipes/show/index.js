@@ -1,6 +1,6 @@
 import React, { useState, Component } from 'react'
 import PageLayout from '../../../layouts/master'
-import recipies from '../../../utils/recipe'
+import recipes from '../../../utils/recipe'
 
 import styles from './index.module.css'
 
@@ -19,13 +19,17 @@ class RecipeForm extends Component{
     }
 
   async componentDidMount() {
-    this.recipe = await recipies.getRecipe(this.id)
+    const recipe = await recipes.getRecipe(this.id)
     
-    await this.setState({recipe: this.recipe})
+    await this.setState({recipe: recipe})
   }
 
-  handleSubmit = async (event) => {
-    
+  onEdit = () => {
+    this.props.history.push(`/recipe/edit/${this.id}`)
+  }
+
+  onDelete = async (event) => {
+    await recipes.deleteRecipe(this.id)
     this.props.history.push('/')
   }
 
@@ -35,14 +39,14 @@ class RecipeForm extends Component{
           <div className={styles["recipe-container"]}>
             <div className={styles["recipe-img"]}></div>
             <div className={styles["recipe-actions"]}>
-              <button>Edit</button>
-              <button>Delete</button>
+              <button onClick={this.onEdit}>Edit</button>
+              <button onClick={this.onDelete}>Delete</button>
             </div>
             <div className={styles["recipe-title"]}>
               {this.state.recipe.title}
             </div>
             <div className={styles["recipe-time"]}>
-              {recipies.formatTime(this.state.recipe.time)}
+              {recipes.formatTime(this.state.recipe.time)}
             </div>
             <div>
               {this.state.recipe.description}  

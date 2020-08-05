@@ -36,8 +36,8 @@ module.exports = {
 
     put: (req, res, next) => {
         const id = req.params.id;
-        const { description } = req.body;
-        models.Recipe.updateOne({ _id: id }, { description })
+        const { title, time, description } = req.body;
+        models.Recipe.updateOne({ _id: id }, { title, time, description })
             .then((updatedrecipe) => res.send(updatedrecipe))
             .catch(next)
     },
