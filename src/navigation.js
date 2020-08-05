@@ -18,7 +18,6 @@ const Navigation = () => {
         <Route path="/" exact component={IndexPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
-        <Route path="/logout" component={RegisterPage} />
         <Route component={ErrorPage} />
       </Switch>
     </BrowserRouter>

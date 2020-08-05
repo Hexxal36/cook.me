@@ -8,9 +8,11 @@ const PageLayout = (props) => {
     <div className="App">
       <Header />
       <div className={styles.container}>
-        <Aside />
+        <div className={styles["aside-container"]}>
+          <Aside />
+        </div>
         <div className={styles["page-container"]}>
-            {props.children}
+          {props.children}
         </div>
       </div>
     </div>
