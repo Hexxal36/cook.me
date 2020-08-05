@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom"
-import PageLayout from '../../layouts/auth'
+import PageLayout from '../../../layouts/auth'
 import styles from './index.module.css'
-import TextBox from '../../components/text-box'
-import Submit from '../../components/submit-btn'
-import authenticate from '../../utils/authenticate'
-import UserContext from '../../Context'
+import TextBox from '../../../components/text-box'
+import Submit from '../../../components/submit-btn'
+import authenticate from '../../../utils/authenticate'
+import UserContext from '../../../Context'
 
 const LoginPage = () => {
   const [username, setUsername] = useState('')

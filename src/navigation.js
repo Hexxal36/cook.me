@@ -5,10 +5,11 @@ import {
   Route
 } from 'react-router-dom'
 
-import IndexPage from './pages/index'
-import LoginPage from './pages/login'
-import RegisterPage from './pages/register'
-import ErrorPage from './pages/error'
+import AuthRoutes from './routes/auth'
+import RecipeRoutes from './routes/recipe'
+
+import IndexPage from './pages/common/index'
+import ErrorPage from './pages/common/error'
 
 const Navigation = () => {
   
@@ -16,8 +17,8 @@ const Navigation = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={IndexPage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register" component={RegisterPage} />
+        {AuthRoutes.map(p => <Route {...p} />)}
+        {RecipeRoutes.map(p => <Route {...p} />)}
         <Route component={ErrorPage} />
       </Switch>
     </BrowserRouter>

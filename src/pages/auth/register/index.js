@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import PageLayout from '../../layouts/auth'
+import PageLayout from '../../../layouts/auth'
 import styles from './index.module.css'
-import TextBox from '../../components/text-box'
-import Submit from '../../components/submit-btn'
+import TextBox from '../../../components/text-box'
+import Submit from '../../../components/submit-btn'
 
-import authenticate from '../../utils/authenticate'
-import UserContext from '../../Context'
+import authenticate from '../../../utils/authenticate'
+import UserContext from '../../../Context'
 
 class RegisterPage extends Component {
   constructor(props) {

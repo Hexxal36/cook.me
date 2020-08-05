@@ -1,5 +1,5 @@
 import React from 'react'
-import PageLayout from '../../layouts/master';
+import PageLayout from '../../../layouts/master';
 
 
 const ErrorPage = () => {

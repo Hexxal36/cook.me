@@ -6,9 +6,9 @@ import Navigation from './navigation'
 import * as serviceWorker from './serviceWorker'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faHome, faPlus, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faSignInAlt } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faHome, faPlus, faSignInAlt, faSignOutAlt)
+library.add(faHome, faSignInAlt)
 
 ReactDOM.render(
   <React.StrictMode>
