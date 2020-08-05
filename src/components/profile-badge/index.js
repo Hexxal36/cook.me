@@ -1,5 +1,8 @@
 import React from 'react'
 import styles from './index.module.css'
+import LogoutBtn from '../logout-btn'
+import { Link } from 'react-router-dom'
+
 
 const ProfileBadge = () => {
     return (
@@ -13,11 +16,18 @@ const ProfileBadge = () => {
 
             <div className={styles["profile-actions"]}>
                 <ul>
-                    <li>
-                        <a href="#">Add a recipe</a>
+                    <li className={styles["create-action"]}>
+                         <Link to="/recipe/create">
+                             Add a recipe
+                         </Link>
+                    </li>
+                    <li className={styles["create-action"]}>
+                        <Link to="/meal/create">
+                            Begin a meal
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">Begin a meal</a>
+                        <LogoutBtn value="logout"/>
                     </li>
                 </ul>
             </div>

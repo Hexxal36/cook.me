@@ -3,7 +3,6 @@ aside {
     margin: 0;
     padding: 0;
     width: 15%;
-    min-width: 200px;
     height: 100%;
     position: fixed;
     overflow: auto;
