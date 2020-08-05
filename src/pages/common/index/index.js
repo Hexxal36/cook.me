@@ -1,6 +1,6 @@
 import React from 'react'
-import PageLayout from '../../layouts/master'
-import CardStack from '../../components/card-stack'
+import PageLayout from '../../../layouts/master'
+import CardStack from '../../../components/card-stack'
 
 const IndexPage = () => {
 

@@ -4,14 +4,6 @@ const getNavigation = (user) => {
       {
         link: "/",
         iconName: "home"
-      },
-      {
-        link: "/create-recipe",
-        iconName: "plus"
-      },
-      {
-        link: `/logout`,
-        iconName: "sign-out-alt"
       }
     ]
   
