@@ -4,6 +4,7 @@ import PageLayout from '../../../layouts/auth'
 import styles from './index.module.css'
 import TextBox from '../../../components/text-box'
 import Submit from '../../../components/submit-btn'
+import FormTitle from '../../../components/form-title'
 
 import authenticate from '../../../utils/authenticate'
 import UserContext from '../../../Context'
@@ -56,7 +57,7 @@ class RegisterPage extends Component {
 
     return (
       <PageLayout>
-          <div className={styles.title}>Register</div>
+          <FormTitle value="Register" />
           <form onSubmit={this.handleSubmit}>
               <TextBox 
                 label="Username" 

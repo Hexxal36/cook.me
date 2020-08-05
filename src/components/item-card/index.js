@@ -1,20 +1,22 @@
 import React from 'react'
 import styles from './index.module.css'
+import { Link } from 'react-router-dom'
+import recipies from '../../utils/recipe'
 
 const ItemCard = ({item}) => {
     return (
         <div className={styles["item-card-container"]}>
-           <a href="">
+            <Link to={`/recipe/${item._id}` }>
                <img src="https://www.askchefdennis.com/wp-content/uploads/2014/10/Fettuccine-Alfredo-2.jpg" />
                <div className={styles["item-card-info"]}>
                     <div>
-                        Title: Pasta
+                        Title: {item.title}
                     </div>
                     <div>
-                        Time: 1h 30m
+                        Time: {recipies.formatTime(item.time)}
                     </div>
                </div>
-           </a>
+           </Link>
 
 
         

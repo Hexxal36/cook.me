@@ -2,21 +2,30 @@ const models = require('../models');
 
 module.exports = {
     get: (req, res, next) => {
-      const length = req.query.length ? parseInt(req.query.length) : 20
-        models.Recipe.find().sort('-created_at').limit(length).populate('author')
-            .then((recipies) => res.send(recipies))
-            .catch(next);
+        const id = req.query.id
+
+        if (id) {
+            models.Recipe.findOne({ _id: id })
+                .then((recipe) => res.send(recipe))
+                .catch(next)
+            return
+        }
+
+        const length = req.query.length ? parseInt(req.query.length) : 20
+            models.Recipe.find().sort('-created_at').limit(length).populate('author')
+                .then((recipes) => res.send(recipes))
+                .catch(next);
     },
 
     post: (req, res, next) => {
-        const { description } = req.body;
+        const { title, time, description } = req.body;
         const { _id } = req.user;
 
-        models.Recipe.create({ description, author: _id })
-            .then((createdRecipe) => {
+        models.Recipe.create({ title, time, description, author: _id })
+            .then((createdrecipe) => {
                 return Promise.all([
-                    models.User.updateOne({ _id }, { $push: { posts: createdRecipe } }),
-                    models.Recipe.findOne({ _id: createdRecipe._id })
+                    models.User.updateOne({ _id }, { $push: { posts: createdrecipe } }),
+                    models.Recipe.findOne({ _id: createdrecipe._id })
                 ]);
             })
             .then(([modifiedObj, recipeObj]) => {
@@ -29,14 +38,14 @@ module.exports = {
         const id = req.params.id;
         const { description } = req.body;
         models.Recipe.updateOne({ _id: id }, { description })
-            .then((updatedRecipe) => res.send(updatedRecipe))
+            .then((updatedrecipe) => res.send(updatedrecipe))
             .catch(next)
     },
 
     delete: (req, res, next) => {
         const id = req.params.id;
         models.Recipe.deleteOne({ _id: id })
-            .then((removedRecipe) => res.send(removedRecipe))
+            .then((removedrecipe) => res.send(removedrecipe))
             .catch(next)
     }
 };

@@ -6,7 +6,7 @@ const IndexPage = () => {
 
   return (
     <PageLayout>
-      <CardStack />
+      <CardStack length="3"/>
     </PageLayout>
   )
 }
