@@ -1,12 +1,20 @@
 const models = require('../models');
+const { model } = require('mongoose');
 
 module.exports = {
     get: (req, res, next) => {
         const id = req.query.id
-
         if (id) {
             models.Recipe.findOne({ _id: id })
-                .then((recipe) => res.send(recipe))
+                .then(recipe => {
+                    const ingredientIds = recipe.ingredients
+                    return models.RecipeIngredient.find().where('_id').in(ingredientIds)
+                        .then(ing => {
+                            recipe.ingredients =ing
+                            return recipe
+                        })
+                })
+                .then(recipe => res.send(recipe))
                 .catch(next)
             return
         }
@@ -50,14 +58,40 @@ module.exports = {
 
     put: (req, res, next) => {
         const id = req.params.id;
-        const { title, time, description } = req.body;
-        models.Recipe.updateOne({ _id: id }, { title, time, description })
-            .then((updatedrecipe) => res.send(updatedrecipe))
-            .catch(next)
+        const { title, time, description, ingredients } = req.body;
+
+        models.Recipe.findOne({ _id: id})
+            .then(recipe => {
+                models.RecipeIngredient.deleteMany({ _id: {$in: recipe.ingredients}}, (err) => {})
+            })
+            .then(() => {
+                models.Recipe.updateOne({ _id: id }, { title, time, description })
+                    .then(updatedrecipe => {
+                        for (const ingredient of ingredients) {
+                            const amount = ingredient.amount
+                            const amountType = ingredient.amountType
+                            const type = ingredient.type
+                
+                            models.RecipeIngredient.create({amount, amountType, type})
+                                .then((createdIngredient) => {
+                                    console.log(createdIngredient);
+                                    return Promise.all([
+                                        models.Recipe.updateOne({ _id: id }, { $push: { ingredients: createdIngredient } })
+                                    ])
+                            })
+                        }
+                    })
+                    .then((updatedrecipe) => res.send(updatedrecipe))
+                    .catch(next)
+            })
     },
 
     delete: (req, res, next) => {
         const id = req.params.id;
+        models.Recipe.findOne({ _id: id})
+        .then(recipe => {
+            models.RecipeIngredient.deleteMany({ _id: {$in: recipe.ingredients}}, (err) => {})
+        })
         models.Recipe.deleteOne({ _id: id })
             .then((removedrecipe) => res.send(removedrecipe))
             .catch(next)

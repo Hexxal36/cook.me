@@ -34,7 +34,9 @@ class RecipeForm extends Component {
       await this.setState({
         title: recipe.title,
         time: recipe.time,
-        description: recipe.description
+        description: recipe.description,
+        count: recipe.ingredients.length,
+        ingredients: recipe.ingredients
       })
       console.log(this.state);
     }
@@ -111,7 +113,7 @@ class RecipeForm extends Component {
   renderIngredients = () => {
     const inputs = []
     for (let i = 0; i < this.state.count; i++) {
-      inputs[i] = (<IngredientInput name={i} onChange={(e, type) => this.onChangeIngredient(e, type, i)} />)
+      inputs[i] = (<IngredientInput value={this.state.ingredients[i]} name={i} onChange={(e, type) => this.onChangeIngredient(e, type, i)} />)
     }
     return inputs
   }

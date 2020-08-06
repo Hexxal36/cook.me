@@ -14,6 +14,7 @@ class RecipeForm extends Component{
           title: 'loading',
           time: 'loading',
           description: 'loading',
+          ingredients: []
         }
       }
     }
@@ -50,7 +51,9 @@ class RecipeForm extends Component{
             </div>
             <div className={styles["recipe-info"]}>
               <div>
-                {console.log(this.state.recipe.ingredients)}
+                <ul>
+                  {(this.state.recipe.ingredients).map((ing, i) => ( <li key={i}>{ing.amount} {ing.amountType} {ing.type}</li>))}
+                </ul>
               </div>
               <div dangerouslySetInnerHTML={
                 {

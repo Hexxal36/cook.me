@@ -36,7 +36,8 @@ const editRecipe = async (recipe) => {
       body: JSON.stringify({
         title: recipe.title,
         description: recipe.description,
-        time: recipe.time
+        time: recipe.time,
+        ingredients: recipe.ingredients
       }),
       headers: {
         'Content-Type': 'application/json',
