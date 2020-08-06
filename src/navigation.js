@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   BrowserRouter,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom'
 
 import AuthRoutes from './routes/auth'
@@ -10,15 +11,24 @@ import RecipeRoutes from './routes/recipe'
 
 import IndexPage from './pages/common/index'
 import ErrorPage from './pages/common/error'
+import ShowRecipe from './pages/recipes/show'
+
+import UserContext from './Context'
 
 const Navigation = () => {
-  
+  const context = useContext(UserContext)
+  const loggedIn = context.user.loggedIn
+
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={IndexPage} />
         {AuthRoutes.map(p => <Route {...p} />)}
-        {RecipeRoutes.map(p => <Route {...p} />)}
+        {RecipeRoutes.map(p => {
+            if (!loggedIn) return (<Redirect to="/login"/>)
+            return(<Route path={p.path} component={p.component}/>)
+          }
+        )}
         <Route component={ErrorPage} />
       </Switch>
     </BrowserRouter>

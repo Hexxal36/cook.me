@@ -3,8 +3,7 @@ const config = require('../config/config');
 const models = require('../models');
 
 module.exports = (redirectAuthenticated = true) => {
-
-    return function (req, res, next) {
+   return function (req, res, next) {
         const token = req.header(config.authCookieName) || '';
 
         jwt.verifyToken(token).then(data => {

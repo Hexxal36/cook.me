@@ -1,7 +1,74 @@
-const getOrigami = async (length) => {
-    const promise = await fetch(`http://localhost:9999/api/origami?length=${length}`)
-    const origamis = await promise.json()
-    return origamis
-  }
-  
-export default getOrigami
+import getCookie from './cookie'
+
+const getRecipes = async (length) => {
+  const promise = await fetch(`http://localhost:9999/api/recipe?length=${length}`)
+  const recipe = await promise.json()
+  return recipe
+}
+
+const getRecipe = async (id) => {
+  const promise = await fetch(`http://localhost:9999/api/recipe?id=${id}`)
+  const recipe = await promise.json()
+
+  return recipe
+}
+
+const createRecipe = async (recipe) => {
+  await fetch('http://localhost:9999/api/recipe', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: recipe.title,
+        description: recipe.description,
+        time: recipe.time,
+        ingredients: recipe.ingredients
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': getCookie('x-auth-token')
+      }
+  })
+  return
+}
+
+const editRecipe = async (recipe) => {
+  await fetch(`http://localhost:9999/api/recipe/${recipe.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        title: recipe.title,
+        description: recipe.description,
+        time: recipe.time,
+        ingredients: recipe.ingredients
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': getCookie('x-auth-token')
+      }
+  })
+  return
+}
+
+const deleteRecipe = async (id) => {
+  await fetch(`http://localhost:9999/api/recipe/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': getCookie('x-auth-token')
+    }
+})
+return
+}
+
+const formatTime = (minutes) => {
+  if(minutes < 60) return `${minutes} min`
+  if(minutes%60 == 0) return `${minutes/60} h`
+  return `${Math.floor(minutes/60)} h ${minutes%60} min`
+}
+
+export default {
+  getRecipes,
+  getRecipe,
+  createRecipe,
+  editRecipe,
+  deleteRecipe,
+  formatTime
+}

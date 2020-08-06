@@ -1,4 +1,4 @@
-.submit-input input {
+.button button {
     border: 1px solid #3498db;
     background: none;
     width: 100%;
@@ -11,7 +11,7 @@
     overflow: hidden;
 }
 
-.submit-input input:hover {
+.button button:hover {
     color: #fff;
     background: #3498db;
 }

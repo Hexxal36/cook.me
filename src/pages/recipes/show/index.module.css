@@ -1,0 +1,29 @@
+.recipe-container {
+    padding: 10px;
+}
+
+.recipe-img {
+    width: 84%;
+    height: 15%;
+    position: fixed;
+    overflow: hidden;
+    background: gray;
+    opacity: 60%;
+    z-index: -1;
+}
+
+.recipe-title {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 700;
+    height: 15%;
+    padding-top: 8vh;
+}
+
+.recipe-time {
+    text-align: right;
+    position: relative;
+    top: -2vh;
+    font-size: 28px;
+    font-weight: 500;
+}

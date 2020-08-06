@@ -1,10 +1,15 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom"
-import PageLayout from '../../../layouts/auth'
 import styles from './index.module.css'
+
+import PageLayout from '../../../layouts/auth'
+
+
 import TextBox from '../../../components/text-box'
-import Submit from '../../../components/submit-btn'
+import Submit from '../../../components/button'
+import FormTitle from '../../../components/form-title'
+
 import authenticate from '../../../utils/authenticate'
 import UserContext from '../../../Context'
 
@@ -31,7 +36,7 @@ const LoginPage = () => {
 
   return (
     <PageLayout>
-      <div className={styles.title}>Login</div>
+      <FormTitle value="Login" />
       <form onSubmit={handleSubmit}>
           <TextBox 
             label="Username" 

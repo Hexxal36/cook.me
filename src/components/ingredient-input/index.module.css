@@ -1,0 +1,17 @@
+.ingredient-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.text-input {
+    width: 60%;
+}
+
+.amount-input {
+    width: 17%;
+}
+
+.amount-type-input {
+    width: 27%;
+    padding-top: 1vh;
+}
