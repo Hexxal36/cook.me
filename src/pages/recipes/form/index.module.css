@@ -8,5 +8,36 @@
 }
 
 .form-container form {
-    width: 35%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.common-inputs {
+    width: 50%;
+}
+
+.complex-inputs {
+    display: flex;
+    flex-direction: row;
+}
+
+.ingredients {
+    padding: 2%;
+}
+
+.ingredient-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: space-around;
+    justify-content: space-around;
+}
+
+.steps {
+    padding: 2%;
+}
+
+.submit-btn {
+    width: 50%;
 }

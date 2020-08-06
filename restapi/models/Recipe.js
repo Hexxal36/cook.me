@@ -20,6 +20,12 @@ const recipeSchema = new Schema({
         required: true,
     },
 
+    ingredients: [
+        {
+            type: ObjectId, ref:"RecipeIngredient"
+        }
+    ],
+
     creator: {
         type: ObjectId,
         ref: "User",

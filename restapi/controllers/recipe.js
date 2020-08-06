@@ -18,11 +18,25 @@ module.exports = {
     },
 
     post: (req, res, next) => {
-        const { title, time, description } = req.body;
+        const { title, time, description, ingredients } = req.body;
         const { _id } = req.user;
 
         models.Recipe.create({ title, time, description, author: _id })
             .then((createdrecipe) => {
+                const recipeId = createdrecipe._id
+                for (const ingredient of ingredients) {
+                    const amount = ingredient.amount
+                    const amountType = ingredient.amountType
+                    const type = ingredient.type
+        
+                    models.RecipeIngredient.create({amount, amountType, type})
+                        .then((createdIngredient) => {
+                            return Promise.all([
+                                models.Recipe.updateOne({ _id: recipeId }, { $push: { ingredients: createdIngredient } })
+                            ])
+                    })
+                }
+
                 return Promise.all([
                     models.User.updateOne({ _id }, { $push: { posts: createdrecipe } }),
                     models.Recipe.findOne({ _id: createdrecipe._id })

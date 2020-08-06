@@ -7,7 +7,7 @@ import PageLayout from '../../../layouts/auth'
 
 
 import TextBox from '../../../components/text-box'
-import Submit from '../../../components/submit-btn'
+import Submit from '../../../components/button'
 import FormTitle from '../../../components/form-title'
 
 import authenticate from '../../../utils/authenticate'

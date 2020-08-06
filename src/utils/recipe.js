@@ -9,6 +9,7 @@ const getRecipes = async (length) => {
 const getRecipe = async (id) => {
   const promise = await fetch(`http://localhost:9999/api/recipe?id=${id}`)
   const recipe = await promise.json()
+
   return recipe
 }
 
@@ -18,7 +19,8 @@ const createRecipe = async (recipe) => {
       body: JSON.stringify({
         title: recipe.title,
         description: recipe.description,
-        time: recipe.time
+        time: recipe.time,
+        ingredients: recipe.ingredients
       }),
       headers: {
         'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PageLayout from '../../../layouts/auth'
 import styles from './index.module.css'
 import TextBox from '../../../components/text-box'
-import Submit from '../../../components/submit-btn'
+import Submit from '../../../components/button'
 import FormTitle from '../../../components/form-title'
 
 import authenticate from '../../../utils/authenticate'

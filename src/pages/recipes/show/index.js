@@ -13,7 +13,7 @@ class RecipeForm extends Component{
         recipe: {
           title: 'loading',
           time: 'loading',
-          description: 'loading'
+          description: 'loading',
         }
       }
     }
@@ -48,10 +48,16 @@ class RecipeForm extends Component{
             <div className={styles["recipe-time"]}>
               {recipes.formatTime(this.state.recipe.time)}
             </div>
-            <div>
-              {this.state.recipe.description}  
+            <div className={styles["recipe-info"]}>
+              <div>
+                {console.log(this.state.recipe.ingredients)}
+              </div>
+              <div dangerouslySetInnerHTML={
+                {
+                  __html: this.state.recipe.description
+                }
+              } />
             </div>
-  
           </div>
       </PageLayout>
     )
