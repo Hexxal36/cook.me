@@ -1,17 +1,67 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './index.module.css'
 import LogoutBtn from '../logout-btn'
 import { Link } from 'react-router-dom'
+import Modal from 'react-modal';
+import ProfileIcon from '../profile-icon'
 
+import users from '../../utils/user';
 
-const ProfileBadge = () => {
+const ProfileBadge = ( {user} ) => {
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const [userState, setUser] = useState(user);
+    const profileIcons = [
+        'boy-blue',
+        'boy-green',
+        'boy-red',
+        'boy-purple',
+        'girl-blue',
+        'girl-green',
+        'girl-red',
+        'girl-purple',
+    ]
+
+    function openModal() {
+      setIsOpen(true);
+    }
+
+    async function updateProfileIcon(pic) {
+        await users.updatePicture(user, pic)
+
+        const userSnapshot = userState
+        userSnapshot.picture = pic
+        setUser(userSnapshot)
+        closeModal()
+    }
+
+    function closeModal(){
+     setIsOpen(false);
+    }
+    
     return (
         <div className={styles["profile-info"]}>
             <div className={styles["profile-icon-container"]}>
-                <div className={styles["profile-icon"]}></div>
+                <ProfileIcon image={userState.picture} width="90%" onClick={() => {openModal()}}/>
             </div>
+            <Modal 
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                className={styles.modal}
+                contentLabel="Example Modal"
+                ariaHideApp={false}
+            >
+                <div className={styles["icon-list"]}>
+                    {
+                        profileIcons.map(
+                            icon => (
+                                <ProfileIcon image={icon} width="23%" onClick={() => {updateProfileIcon(icon)}} />
+                            )
+                        )
+                    }
+                </div>
+            </Modal>
             <div className={styles["profile-text-container"]}>
-                <p className={styles["profile-text"]}>Joni</p>
+                <p className={styles["profile-text"]}>{userState.username}</p>
             </div>
 
             <div className={styles["profile-actions"]}>

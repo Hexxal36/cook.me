@@ -40,6 +40,7 @@ const App = (props) => {
       if(response.status) {
         logIn({
           username: response.user.username,
+          picture: response.user.picture,
           id: response.user._id
         })
       } else {

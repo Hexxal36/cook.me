@@ -1,0 +1,8 @@
+.profile-icon {
+    margin: 0 auto;
+    border-radius: 150px;
+    z-index: 0;
+    cursor: pointer;
+    padding: 1%;
+}
+
