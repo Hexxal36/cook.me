@@ -6,3 +6,7 @@
   right: 0;
   overflow: auto;
 }
+
+.height-buffer {
+  height: 10vh;
+}

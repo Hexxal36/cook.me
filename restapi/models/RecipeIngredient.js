@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Model = mongoose.model;
-const { String, Number } = Schema.Types;
+const { String, Number, ObjectId } = Schema.Types;
 
 const recipeIngredientSchema = new Schema({
 
@@ -18,6 +18,11 @@ const recipeIngredientSchema = new Schema({
     type: {
         type: String,
         required: true,
+    },
+
+    recipe: {
+        type: ObjectId,
+        ref: "Recipe"
     }
 
 }, { timestamps: { createdAt: 'created_at' } });

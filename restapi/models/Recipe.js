@@ -26,6 +26,13 @@ const recipeSchema = new Schema({
         }
     ],
 
+    comments: [
+        {
+            type: ObjectId,
+            ref: "Comment",
+        }
+    ],
+
     creator: {
         type: ObjectId,
         ref: "User",
