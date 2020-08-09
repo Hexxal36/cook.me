@@ -19,6 +19,12 @@ const userSchema = new Schema({
         require: true
     },
 
+    picture: {
+        type: String,
+        default: 'boy-blue',
+        require: true
+    },
+
     recipies: [{ type: ObjectId, ref: "Recipe" }]
 
 });

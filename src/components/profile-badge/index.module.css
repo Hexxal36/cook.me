@@ -1,20 +1,7 @@
-.profile-info {
-
-}
-
 .profile-icon-container {
     height: 50%;
     display: flex;
     place-items: center
-}
-
-.profile-icon {
-    background-color: gray;
-    padding: 80px;
-    margin: 0 auto;
-    width: fit-content;
-    border-radius: 150px;
-    z-index: 0;
 }
 
 .profile-text-container {
@@ -86,4 +73,20 @@
 .create-action:hover {
     color: #3498db;
     background: #3498db;
+}
+
+.modal {
+    position: relative;
+    top: 5vh;
+    left: 15%;
+    height: 50%;
+    width: 50%;
+    background: wheat;
+    border: 1px solid black;
+    padding: 1%;
+}
+
+.icon-list {
+    display: flex;
+    flex-wrap: wrap;
 }

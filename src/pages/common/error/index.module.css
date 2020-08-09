@@ -1,0 +1,23 @@
+.status-code {
+    text-align: center;
+    font-size: 56px;
+    font-weight: 500;
+    color: red;
+    margin: 2vh;
+}
+
+.status-title {
+    text-align: center;
+    font-size: 50px;
+    color: rebeccapurple;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    width: auto;
+    height: 65vh;
+}

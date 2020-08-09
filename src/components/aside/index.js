@@ -12,7 +12,7 @@ const Aside = () => {
         <aside>
             <div className={styles["profile-container"]}>
                 {loggedIn? 
-                <ProfileBadge />:
+                <ProfileBadge user={context.user}/>:
                 <div>
                     logged-out
                 </div>
