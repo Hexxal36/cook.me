@@ -9,7 +9,6 @@ class Textarea extends React.Component {
     render() {
         return (
             <div>
-                <label>Test</label>
                 <Editor
                     initialValue={`<p>${this.props.value}</p>`}
                     init={{

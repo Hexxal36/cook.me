@@ -37,7 +37,7 @@ module.exports = {
                     const amountType = ingredient.amountType
                     const type = ingredient.type
         
-                    models.RecipeIngredient.create({amount, amountType, type})
+                    models.RecipeIngredient.create({amount, amountType, type, recipe: recipeId})
                         .then((createdIngredient) => {
                             return Promise.all([
                                 models.Recipe.updateOne({ _id: recipeId }, { $push: { ingredients: createdIngredient } })
@@ -72,9 +72,8 @@ module.exports = {
                             const amountType = ingredient.amountType
                             const type = ingredient.type
                 
-                            models.RecipeIngredient.create({amount, amountType, type})
+                            models.RecipeIngredient.create({amount, amountType, type, recipe: id})
                                 .then((createdIngredient) => {
-                                    console.log(createdIngredient);
                                     return Promise.all([
                                         models.Recipe.updateOne({ _id: id }, { $push: { ingredients: createdIngredient } })
                                     ])

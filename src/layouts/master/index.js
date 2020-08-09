@@ -13,6 +13,7 @@ const PageLayout = (props) => {
         </div>
         <div className={styles["page-container"]}>
           {props.children}
+        <div className={styles["height-buffer"]}></div>
         </div>
       </div>
     </div>
