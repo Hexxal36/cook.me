@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+
+import UserContext from '../../../Context'
 import PageLayout from '../../../layouts/master'
 import CommentForm from '../../../components/comment-form'
 import Button from '../../../components/button'
@@ -13,6 +15,7 @@ class RecipeForm extends Component{
 
       this.id = this.props.match.params.id
       this.state = {
+        user: {},
         recipe: {
           title: 'loading',
           time: 'loading',
@@ -28,11 +31,16 @@ class RecipeForm extends Component{
       }
     }
 
-  async componentWillMount() {
+  static contextType = UserContext
+  
+  async componentDidMount() {
     await this.getComments()
+    
+    this.setState({user: this.context.user})
 
     const recipe = await recipes.getRecipe(this.id)
-    await this.setState({recipe: recipe})
+    this.setState({recipe: recipe})
+    console.log(recipe);
   }
 
   getComments = async () => {
@@ -83,10 +91,12 @@ class RecipeForm extends Component{
       <PageLayout>
           <div className={styles["recipe-container"]}>
             <img src={this.state.recipe.imageLink} className={styles["recipe-img"]} />
-            <div className={styles["recipe-actions"]}>
+            {this.state.user.id === this.state.recipe.creator ? 
+            (<div className={styles["recipe-actions"]}>
               <button onClick={this.onEdit}>Edit</button>
               <button onClick={this.onDelete}>Delete</button>
-            </div>
+            </div>) : null
+            }
             <div className={styles["recipe-title"]}>
               {this.state.recipe.title}
             </div>

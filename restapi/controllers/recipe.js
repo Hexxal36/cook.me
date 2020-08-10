@@ -29,9 +29,7 @@ module.exports = {
         const { title, time, description, imageLink, ingredients } = req.body;
         const { _id } = req.user;
 
-        console.log(imageLink);
-
-        models.Recipe.create({ title, time, description, imageLink, author: _id })
+        models.Recipe.create({ title, time, description, imageLink, creator: _id })
             .then((createdrecipe) => {
                 const recipeId = createdrecipe._id
                 for (const ingredient of ingredients) {
@@ -61,8 +59,14 @@ module.exports = {
     put: (req, res, next) => {
         const id = req.params.id;
         const { title, time, description, imageLink, ingredients } = req.body;
+        const { _id } = req.user;
 
+        
         models.Recipe.findOne({ _id: id})
+            .then(recipe => {
+                if (recipe.creator === _id) return recipe
+                throw 'User is not creator'
+            })
             .then(recipe => {
                 models.RecipeIngredient.deleteMany({ _id: {$in: recipe.ingredients}}, (err) => {})
             })
@@ -89,7 +93,13 @@ module.exports = {
 
     delete: (req, res, next) => {
         const id = req.params.id;
+        const { _id } = req.user;
+
         models.Recipe.findOne({ _id: id})
+        .then(recipe => {
+            if (recipe.creator === _id) return recipe
+            throw 'User is not creator'
+        })
         .then(recipe => {
             models.RecipeIngredient.deleteMany({ _id: {$in: recipe.ingredients}}, (err) => {})
             models.Comment.deleteMany({ _id: {$in: recipe.comments}}, (err) => {})
