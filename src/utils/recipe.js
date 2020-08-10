@@ -20,6 +20,7 @@ const createRecipe = async (recipe) => {
         title: recipe.title,
         description: recipe.description,
         time: recipe.time,
+        imageLink: recipe.imageLink,
         ingredients: recipe.ingredients
       }),
       headers: {
@@ -37,6 +38,7 @@ const editRecipe = async (recipe) => {
         title: recipe.title,
         description: recipe.description,
         time: recipe.time,
+        imageLink: recipe.imageLink,
         ingredients: recipe.ingredients
       }),
       headers: {
