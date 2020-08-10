@@ -23,10 +23,11 @@ class Header extends Component {
                 <ul className={styles["main-nav"]}>
                     <div className={styles["right-nav"]}>
                         {
-                            links.map(navElement => {
+                            links.map((navElement, i) => {
                                 return (
-                                <li>
+                                <li key={`${i}-li`}>
                                     <IconLink
+                                        key={`${i}-link`}
                                         href={navElement.link}
                                         iconName={navElement.iconName}
                                     />

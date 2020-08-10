@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react'
+import React, { Component } from 'react'
 import PageLayout from '../../../layouts/master'
 import CommentForm from '../../../components/comment-form'
 import Button from '../../../components/button'
@@ -51,7 +51,7 @@ class RecipeForm extends Component{
   onShowMoreComments = (e) => {
     e.preventDefault()
 
-    this.setState({commentPage : ++(this.state.commentPage)})
+    this.setState({commentPage : (this.state.commentPage + 1)})
   }
 
   onCommentSubmit = async (e) => {

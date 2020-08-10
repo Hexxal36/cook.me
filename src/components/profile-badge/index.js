@@ -53,8 +53,8 @@ const ProfileBadge = ( {user} ) => {
                 <div className={styles["icon-list"]}>
                     {
                         profileIcons.map(
-                            icon => (
-                                <ProfileIcon image={icon} width="23%" onClick={() => {updateProfileIcon(icon)}} />
+                            (icon, i) => (
+                                <ProfileIcon key={i} image={icon} width="23%" onClick={() => {updateProfileIcon(icon)}} />
                             )
                         )
                     }

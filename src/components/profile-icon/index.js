@@ -3,7 +3,8 @@ import styles from './index.module.css'
 
 const ProfileIcon = ({width, onClick, image}) => {
     return (
-        <img 
+        <img
+            alt="" 
             width={width}
             src={process.env.PUBLIC_URL + `/profile-icons/${image}.png`}
             className={styles["profile-icon"]} 

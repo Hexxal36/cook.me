@@ -6,10 +6,6 @@ import Submit from '../button'
 import Textarea from '../textarea'
 
 class CommentForm extends Component {
-  constructor(props) {
-    super(props)
-  }
-  
     render() {
         return (
           <div className={styles["comment-form-container"]}>
