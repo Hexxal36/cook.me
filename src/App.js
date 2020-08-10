@@ -38,16 +38,16 @@ const App = (props) => {
       return promise.json()
     }).then(response => {
       if(response.status) {
-        logIn({
+        const userObj = {
           username: response.user.username,
           picture: response.user.picture,
           id: response.user._id
-        })
+        }
+        logIn(userObj)
       } else {
         logOut()
       }
-      setLoading(false)
-    })
+    }).then(() => setLoading(false))
   }, [])
 
   if (loading) {

@@ -82,7 +82,7 @@ class RecipeForm extends Component{
     return (
       <PageLayout>
           <div className={styles["recipe-container"]}>
-            <div className={styles["recipe-img"]}></div>
+            <img src={this.state.recipe.imageLink} className={styles["recipe-img"]} />
             <div className={styles["recipe-actions"]}>
               <button onClick={this.onEdit}>Edit</button>
               <button onClick={this.onDelete}>Delete</button>
@@ -117,7 +117,9 @@ class RecipeForm extends Component{
               }
             }/></li>))}
             <div className={styles["show-more"]}>
-              <Button onClick={this.onShowMoreComments} value="Show more"/>
+            {
+              this.state.comments.length > (this.state.comments.slice(0, 3 * this.state.commentPage).length) ? <Button onClick={this.onShowMoreComments} value="Show more"/> : null
+            }
             </div>
           </ul>
           </div>

@@ -1,0 +1,9 @@
+.img-upload {
+    display: flex;
+    flex-direction: row;
+}
+
+.img-upload,
+.img-upload img {
+    max-height: 400px;
+}

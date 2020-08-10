@@ -26,10 +26,12 @@ module.exports = {
     },
 
     post: (req, res, next) => {
-        const { title, time, description, ingredients } = req.body;
+        const { title, time, description, imageLink, ingredients } = req.body;
         const { _id } = req.user;
 
-        models.Recipe.create({ title, time, description, author: _id })
+        console.log(imageLink);
+
+        models.Recipe.create({ title, time, description, imageLink, author: _id })
             .then((createdrecipe) => {
                 const recipeId = createdrecipe._id
                 for (const ingredient of ingredients) {
@@ -58,14 +60,14 @@ module.exports = {
 
     put: (req, res, next) => {
         const id = req.params.id;
-        const { title, time, description, ingredients } = req.body;
+        const { title, time, description, imageLink, ingredients } = req.body;
 
         models.Recipe.findOne({ _id: id})
             .then(recipe => {
                 models.RecipeIngredient.deleteMany({ _id: {$in: recipe.ingredients}}, (err) => {})
             })
             .then(() => {
-                models.Recipe.updateOne({ _id: id }, { title, time, description })
+                models.Recipe.updateOne({ _id: id }, { title, time, description, imageLink })
                     .then(updatedrecipe => {
                         for (const ingredient of ingredients) {
                             const amount = ingredient.amount
@@ -90,6 +92,7 @@ module.exports = {
         models.Recipe.findOne({ _id: id})
         .then(recipe => {
             models.RecipeIngredient.deleteMany({ _id: {$in: recipe.ingredients}}, (err) => {})
+            models.Comment.deleteMany({ _id: {$in: recipe.comments}}, (err) => {})
         })
         models.Recipe.deleteOne({ _id: id })
             .then((removedrecipe) => res.send(removedrecipe))

@@ -3,6 +3,7 @@ import PageLayout from '../../../layouts/master'
 import TextBox from '../../../components/text-box'
 import FormTitle from '../../../components/form-title'
 import Button from '../../../components/button'
+import ImageUpload from '../../../components/image-upload'
 import recipes from '../../../utils/recipe'
 
 import styles from './index.module.css'
@@ -20,23 +21,23 @@ class RecipeForm extends Component {
       title : '',
       time: '',
       description: '',
+      imgUrl: '',
       ingredients: []
     }
   }
   
   componentDidMount = async () => {
     if (this.isEdit) {
-      console.log('y');
       const recipe = await recipes.getRecipe(this.props.match.params.id)
 
       await this.setState({
         title: recipe.title,
         time: recipe.time,
         description: recipe.description,
+        imgUrl: recipe.imageLink,
         count: recipe.ingredients.length,
         ingredients: recipe.ingredients
       })
-      console.log(this.state);
     }
   }
   
@@ -62,6 +63,7 @@ class RecipeForm extends Component {
       title: this.state.title,
       time: this.state.time,
       description: this.state.description,
+      imageLink: this.state.imgUrl,
       ingredients: this.state.ingredients
     } )
 
@@ -75,6 +77,7 @@ class RecipeForm extends Component {
       title: this.state.title,
       time: this.state.time,
       description: this.state.description,
+      imageLink: this.state.imgUrl,
       ingredients: this.state.ingredients
     } )
 
@@ -133,6 +136,7 @@ class RecipeForm extends Component {
                   onChange={e => this.onChange(e, 'time')}
                   value={this.state.time}
                 />
+                <ImageUpload src={this.state.imgUrl} onUpload={e => this.onChange(e, 'imgUrl')}/>
               </div>
               <div className={styles["complex-inputs"]}>
                 <div className={styles["ingredients"]}>
