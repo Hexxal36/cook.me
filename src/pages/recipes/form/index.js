@@ -1,11 +1,9 @@
-import React, { useState, Component } from 'react'
+import React, { Component } from 'react'
 import PageLayout from '../../../layouts/master'
 import TextBox from '../../../components/text-box'
 import FormTitle from '../../../components/form-title'
 import Button from '../../../components/button'
 import recipes from '../../../utils/recipe'
-
-import { useHistory } from "react-router-dom"
 
 import styles from './index.module.css'
 import Textarea from '../../../components/textarea'
@@ -59,7 +57,6 @@ class RecipeForm extends Component {
   editRecipe = async (event) => {
     event.preventDefault()
 
-    const id = this.props.match.params.id
     await recipes.editRecipe( {
       id: this.props.match.params.id,
       title: this.state.title,
@@ -87,7 +84,7 @@ class RecipeForm extends Component {
   addIngredient = (event) => {
     event.preventDefault()
 
-    this.setState({count: ++this.state.count})
+    this.setState({count: (this.state.count + 1)})
     
     const ingredientSnapshot = this.state.ingredients
     ingredientSnapshot.push({
@@ -102,7 +99,7 @@ class RecipeForm extends Component {
   removeIngredient = (event) => {
     event.preventDefault()
 
-    this.setState({count: --this.state.count})
+    this.setState({count: (this.state.count - 1)})
 
     const ingredientSnapshot = this.state.ingredients
     ingredientSnapshot.pop()

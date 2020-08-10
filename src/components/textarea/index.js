@@ -2,10 +2,6 @@ import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
 class Textarea extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return (
             <div>
@@ -20,9 +16,7 @@ class Textarea extends React.Component {
                         'insertdatetime media table paste code help wordcount'
                     ],
                     toolbar:
-                        'undo redo | formatselect | bold italic backcolor | \
-                        alignleft aligncenter alignright alignjustify | \
-                        bullist numlist outdent indent | removeformat | help'
+                        'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
                     }}
                     onEditorChange={this.props.onChange}
                 />

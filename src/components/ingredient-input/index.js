@@ -3,13 +3,8 @@ import styles from './index.module.css'
 
 import TextBox from '../text-box'
 import Select from 'react-select'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class IngredientInput extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return (
             <div className={styles["ingredient-container"]}>

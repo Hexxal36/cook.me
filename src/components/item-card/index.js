@@ -7,7 +7,7 @@ const ItemCard = ({item}) => {
     return (
         <div className={styles["item-card-container"]}>
             <Link to={`/recipe/${item._id}` }>
-               <img src="https://www.askchefdennis.com/wp-content/uploads/2014/10/Fettuccine-Alfredo-2.jpg" />
+               <img alt="" src="https://www.askchefdennis.com/wp-content/uploads/2014/10/Fettuccine-Alfredo-2.jpg" />
                <div className={styles["item-card-info"]}>
                     <div>
                         Title: {item.title}

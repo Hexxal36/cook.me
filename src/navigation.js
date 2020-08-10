@@ -11,7 +11,6 @@ import RecipeRoutes from './routes/recipe'
 
 import IndexPage from './pages/common/index'
 import ErrorPage from './pages/common/error'
-import ShowRecipe from './pages/recipes/show'
 
 import UserContext from './Context'
 
@@ -23,10 +22,10 @@ const Navigation = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={IndexPage} />
-        {AuthRoutes.map(p => <Route {...p} />)}
-        {RecipeRoutes.map(p => {
-            if (!loggedIn) return (<Redirect to="/login"/>)
-            return(<Route path={p.path} component={p.component}/>)
+        {AuthRoutes.map((p, i)  => <Route key={i} {...p} />)}
+        {RecipeRoutes.map((p, i) => {
+            if (!loggedIn) return (<Redirect key={i} to="/login"/>)
+            return(<Route key={i} path={p.path} component={p.component}/>)
           }
         )}
         <Route component={ErrorPage} />
