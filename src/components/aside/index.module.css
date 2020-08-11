@@ -12,3 +12,15 @@ aside {
     height: 50%;
     place-items: center;
 }
+
+.logged-out {
+    margin: 0.5vh;
+    background: lightgray;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 18px;
+}
+
+img {
+    width: 100%;
+}

@@ -1,33 +1,50 @@
-import React, { useState, useEffect } from 'react'
+import React, { Component } from 'react'
 import styles from './index.module.css'
 import ItemCard from '../item-card'
 import recipes from '../../utils/recipe'
+import { render } from '@testing-library/react'
 
-const CardStack = (props) => {
-    const [recipeState, setRecipes] = useState([])
+class CardStack extends Component {
+    constructor(props) {
+        super(props)
 
-    const getRecipes = async () => {
-        const recipesSnapshot = await recipes.getRecipes(props.user)
-        setRecipes(recipesSnapshot)
+        this.state = {
+            recipeState: []
+        }
     }
 
-    const renderRecipes = () => {
-        return recipeState.map((recipe, index) => {
+    getRecipes = async () => {
+        let recipesSnapshot = null
+        if(this.props.user) recipesSnapshot = await recipes.getRecipesByUser(this.props.user) 
+        else if(this.props.query) recipesSnapshot = await recipes.getRecipesByQuery(this.props.query)
+        else recipesSnapshot = await recipes.getRecipes()
+
+        this.setState({recipeState: recipesSnapshot})
+    }
+
+    renderRecipes = () => {
+        return this.state.recipeState.map((recipe, index) => {
             return (
                 <ItemCard key={index} item={recipe}/>
             )
         })
     }
 
-    useEffect(() => {
-        getRecipes()
-    }, [props.updatedRecipe, recipes.getRecipes])
+    componentDidMount = () => {
+        this.getRecipes()
+    }
 
-    return (
-        <div className={styles["card-container"]}>
-            {renderRecipes()}
-        </div>
-    )
+    componentWillUpdate = () => {
+        this.getRecipes()
+    }
+
+    render() {
+        return (
+            <div className={styles["card-container"]}>
+                {this.renderRecipes()}
+            </div>
+        )
+    }
 }
 
 export default CardStack

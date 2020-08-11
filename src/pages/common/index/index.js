@@ -6,7 +6,7 @@ const IndexPage = ({ match }) => {
 
   return (
     <PageLayout>
-      <CardStack user={match.params.username}/>
+      <CardStack user={match.params.username} query={match.params.query}/>
     </PageLayout>
   )
 }

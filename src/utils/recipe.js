@@ -1,9 +1,22 @@
 import getCookie from './cookie'
 
-const getRecipes = async (username) => {
-  let url = 'http://localhost:9999/api/recipe'
-  if (username) url += `?username=${username}`
+const getRecipes = async () => {
+  const promise = await fetch('http://localhost:9999/api/recipe')
+  const recipes = await promise.json()
+  return recipes
+}
 
+const getRecipesByQuery = async (query) => {
+  let url = `http://localhost:9999/api/recipe?q=${query}`
+  
+  const promise = await fetch(url)
+  const recipes = await promise.json()
+  return recipes
+}
+
+const getRecipesByUser = async (username) => {
+  let url = `http://localhost:9999/api/recipe?username=${username}`
+  
   const promise = await fetch(url)
   const recipes = await promise.json()
   return recipes
@@ -71,6 +84,8 @@ const formatTime = (minutes) => {
 
 export default {
   getRecipes,
+  getRecipesByUser,
+  getRecipesByQuery,
   getRecipe,
   createRecipe,
   editRecipe,
