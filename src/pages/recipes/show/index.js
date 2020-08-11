@@ -113,7 +113,7 @@ class RecipeForm extends Component{
                 }
               } />
               <div className={styles["recipe-time"]}>
-                {recipes.formatTime(this.state.recipe.time)}
+                Time: {recipes.formatTime(this.state.recipe.time)}
               </div>
             </div>
           </div>

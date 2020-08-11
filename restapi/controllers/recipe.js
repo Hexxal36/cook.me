@@ -90,7 +90,7 @@ module.exports = {
         
         models.Recipe.findOne({ _id: id})
             .then(recipe => {
-                if (recipe.creator === _id) return recipe
+                if (recipe.creator.toString() === _id.toString()) return recipe
                 throw 'User is not creator'
             })
             .then(recipe => {

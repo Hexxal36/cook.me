@@ -22,7 +22,7 @@ class RecipeForm extends Component {
       time: '',
       description: '',
       imgUrl: '',
-      ingredients: []
+      ingredients: [],
     }
   }
   
@@ -73,7 +73,7 @@ class RecipeForm extends Component {
   createRecipe = async (event) => {
     event.preventDefault()
 
-    await recipes.createRecipe( {
+      await recipes.createRecipe( {
       title: this.state.title,
       time: this.state.time,
       description: this.state.description,
