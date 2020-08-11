@@ -8,7 +8,7 @@ const ErrorPage = () => {
     <div className={styles["status-code"]}>404</div>
     <div className={styles["status-title"]}>Not Found</div>
     <div className={styles["logo-container"]}>
-      <img className={styles["image"]} alt="logo" className={styles.logo} src={process.env.PUBLIC_URL + '/logo.png'}/>
+      <img className={styles["image"]} alt="logo" src={process.env.PUBLIC_URL + '/logo.png'}/>
     </div>
     </PageLayout>
   )

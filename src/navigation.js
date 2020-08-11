@@ -3,7 +3,6 @@ import {
   BrowserRouter,
   Switch,
   Route,
-  Redirect
 } from 'react-router-dom'
 
 import AuthRoutes from './routes/auth'

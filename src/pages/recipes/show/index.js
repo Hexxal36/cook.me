@@ -90,7 +90,7 @@ class RecipeForm extends Component{
     return (
       <PageLayout>
           <div className={styles["recipe-container"]}>
-            <img src={this.state.recipe.imageLink} className={styles["recipe-img"]} />
+            <img alt="" src={this.state.recipe.imageLink} className={styles["recipe-img"]} />
             {this.state.user.id === this.state.recipe.creator ? 
             (<div className={styles["recipe-actions"]}>
               <button onClick={this.onEdit}>Edit</button>

@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import styles from './index.module.css'
 import ItemCard from '../item-card'
 import recipes from '../../utils/recipe'
-import { render } from '@testing-library/react'
 
 class CardStack extends Component {
+    _isMounted = false
+
     constructor(props) {
         super(props)
 
@@ -19,7 +20,7 @@ class CardStack extends Component {
         else if(this.props.query) recipesSnapshot = await recipes.getRecipesByQuery(this.props.query)
         else recipesSnapshot = await recipes.getRecipes()
 
-        this.setState({recipeState: recipesSnapshot})
+        if(this._isMounted) this.setState({recipeState: recipesSnapshot})
     }
 
     renderRecipes = () => {
@@ -31,11 +32,16 @@ class CardStack extends Component {
     }
 
     componentDidMount = () => {
+        this._isMounted = true
         this.getRecipes()
     }
 
-    componentWillUpdate = () => {
-        this.getRecipes()
+    componentDidUpdate = () => {
+        if (this._isMounted) this.getRecipes()
+    }
+
+    componentWillUnmount = () => {
+        this._isMounted = false
     }
 
     render() {

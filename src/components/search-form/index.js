@@ -1,17 +1,12 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from "react-router-dom"
 import styles from './index.module.css'
-import recipes from '../../utils/recipe'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import UserContext from '../../Context'
-
-import IconLink from '../icon-link'
 
 const SearchForm = () => {
     const [query, setQuery] = useState('')
 
-    const context = useContext(UserContext)
     const history = useHistory()
     
 

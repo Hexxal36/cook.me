@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import UserContext from '../../Context'
 import styles from './index.module.css'
 import ProfileBadge from '../profile-badge'
-import ProfileIcon from '../profile-icon'
 
 const Aside = () => {
     const context = useContext(UserContext)
