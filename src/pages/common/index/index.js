@@ -2,11 +2,11 @@ import React from 'react'
 import PageLayout from '../../../layouts/master'
 import CardStack from '../../../components/card-stack'
 
-const IndexPage = () => {
+const IndexPage = ({ match }) => {
 
   return (
     <PageLayout>
-      <CardStack length="3"/>
+      <CardStack user={match.params.username}/>
     </PageLayout>
   )
 }

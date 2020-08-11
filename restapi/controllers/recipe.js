@@ -4,6 +4,8 @@ const { model } = require('mongoose');
 module.exports = {
     get: (req, res, next) => {
         const id = req.query.id
+        const username = req.query.username
+        
         if (id) {
             models.Recipe.findOne({ _id: id })
                 .then(recipe => {
@@ -19,10 +21,26 @@ module.exports = {
             return
         }
 
-        const length = req.query.length ? parseInt(req.query.length) : 20
-            models.Recipe.find().sort('-created_at').limit(length).populate('author')
-                .then((recipes) => res.send(recipes))
+        const length = 3
+
+        if (username) {
+            models.User.findOne({username})
+                .then(user => {
+                    const creator = user._id
+                    models.Recipe.find({creator}).sort('-created_at').limit(length)
+                    .then((recipes) => {
+                        res.send(recipes)
+                    })
+                    .catch(next);
+                    return
+                })
+        }else {
+            models.Recipe.find().sort('-created_at').limit(length)
+                .then((recipes) => {
+                    res.send(recipes)})
                 .catch(next);
+        }
+        
     },
 
     post: (req, res, next) => {
