@@ -1,9 +1,12 @@
 import getCookie from './cookie'
 
-const getRecipes = async (length) => {
-  const promise = await fetch(`http://localhost:9999/api/recipe?length=${length}`)
-  const recipe = await promise.json()
-  return recipe
+const getRecipes = async (username) => {
+  let url = 'http://localhost:9999/api/recipe'
+  if (username) url += `?username=${username}`
+
+  const promise = await fetch(url)
+  const recipes = await promise.json()
+  return recipes
 }
 
 const getRecipe = async (id) => {

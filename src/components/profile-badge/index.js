@@ -72,8 +72,8 @@ const ProfileBadge = ( {user} ) => {
                          </Link>
                     </li>
                     <li className={styles["create-action"]}>
-                        <Link to="/meal/create">
-                            Begin a meal
+                        <Link to={`/recipe/user/${userState.username}`}>
+                            My recipes
                         </Link>
                     </li>
                     <li>
