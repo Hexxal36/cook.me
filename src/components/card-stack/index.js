@@ -21,7 +21,7 @@ const CardStack = (props) => {
 
     useEffect(() => {
         getRecipes()
-    })
+    }, [props.updatedRecipe, recipies.getRecipes])
 
     return (
         <div className={styles["card-container"]}>

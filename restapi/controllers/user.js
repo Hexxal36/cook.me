@@ -18,8 +18,7 @@ module.exports = {
                   res.header("Authorization", token).send(createdUser);
                 })
                 .catch((err) => {
-
-                  console.log(err)
+                    res.status(500).send("Error")
                 })
         },
 

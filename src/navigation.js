@@ -24,8 +24,8 @@ const Navigation = () => {
         <Route path="/" exact component={IndexPage} />
         {AuthRoutes.map((p, i)  => <Route key={i} {...p} />)}
         {RecipeRoutes.map((p, i) => {
-            if (!loggedIn) return (<Redirect key={i} to="/login"/>)
-            return(<Route key={i} path={p.path} component={p.component}/>)
+           
+            return(<Route key={i} path={p.path} component={ loggedIn ? p.component : (<Redirect key={i} to="/login"/>) }/>)
           }
         )}
         <Route component={ErrorPage} />
