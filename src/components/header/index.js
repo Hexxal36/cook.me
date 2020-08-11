@@ -3,9 +3,7 @@ import IconLink from '../icon-link'
 import styles from './index.module.css'
 import getNavigation from '../../utils/navigation'
 import UserContext from '../../Context'
-
-
-
+import SearchForm from '../../components/search-form'
 
 class Header extends Component {
 
@@ -21,7 +19,7 @@ class Header extends Component {
         return (
             <header>
                 <ul className={styles["main-nav"]}>
-                    <div className={styles["right-nav"]}>
+                    <div className={styles["left-nav"]}>
                         {
                             links.map((navElement, i) => {
                                 return (
@@ -35,6 +33,9 @@ class Header extends Component {
                                 )
                             })
                         }
+                    </div>
+                    <div className={styles["right-nav"]}>
+                        <SearchForm />
                     </div>
                 </ul>
             </header>

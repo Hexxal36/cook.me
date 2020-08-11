@@ -15,8 +15,9 @@ class RecipeForm extends Component{
 
       this.id = this.props.match.params.id
       this.state = {
-        user: {},
+        user: { id: '' },
         recipe: {
+          creator: '',
           title: 'loading',
           time: 'loading',
           description: 'loading',
@@ -40,7 +41,6 @@ class RecipeForm extends Component{
 
     const recipe = await recipes.getRecipe(this.id)
     this.setState({recipe: recipe})
-    console.log(recipe);
   }
 
   getComments = async () => {

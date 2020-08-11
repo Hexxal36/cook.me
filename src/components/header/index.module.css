@@ -30,11 +30,12 @@ header {
     background-color: rgb(209, 242, 253);
 }
 
-.right-nav {
+.left-nav {
     display: flex;
+    float: left;
     max-width: 200px;
 }
 
-.left-nav {
-    float: left;
+.right-nav {
+    float: right;
 }

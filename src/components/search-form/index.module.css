@@ -1,0 +1,14 @@
+.search-form {
+    display: flex;
+    flex-direction: row;
+}
+
+button {
+    border: 0;
+    background: 0;
+    outline: none;
+}
+
+li {
+    cursor: pointer;
+}

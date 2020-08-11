@@ -1,10 +1,12 @@
 const models = require('../models');
 const { model } = require('mongoose');
+const { query } = require('express');
 
 module.exports = {
     get: (req, res, next) => {
         const id = req.query.id
         const username = req.query.username
+        const query = req.query.q
         
         if (id) {
             models.Recipe.findOne({ _id: id })
@@ -34,7 +36,13 @@ module.exports = {
                     .catch(next);
                     return
                 })
-        }else {
+        } else if(query) {
+            models.Recipe.find({title: { $regex: '.*' + query + '.*' } }).sort('-created_at').limit(length)
+            .then((recipes) => {
+                res.send(recipes)})
+            .catch(next);
+        }
+        else {
             models.Recipe.find().sort('-created_at').limit(length)
                 .then((recipes) => {
                     res.send(recipes)})
