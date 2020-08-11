@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styles from './index.module.css'
+import ingTypes from '../../utils/ingredientTypes'
 
 import TextBox from '../text-box'
 import Select from 'react-select'
@@ -20,12 +21,7 @@ class IngredientInput extends Component {
                 </div>
                 <div className={styles["amount-type-input"]}>
                     <Select name={`amountType${this.props.name}`} 
-                        value={{value: 'mL', label: 'mL'}}
-                        options={
-                            [
-                                { value: 'mL', label: 'mL'}
-                            ]
-                        }
+                        options={ ingTypes }
                         onChange={e => this.props.onChange(e, 'amountType')}
                     />
                 </div>
