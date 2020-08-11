@@ -5,17 +5,18 @@ import styles from './index.module.css'
 
 import PageLayout from '../../../layouts/auth'
 
-
 import TextBox from '../../../components/text-box'
 import Submit from '../../../components/button'
 import FormTitle from '../../../components/form-title'
 
 import authenticate from '../../../utils/authenticate'
 import UserContext from '../../../Context'
+import Notification from '../../../components/notification'
 
 const LoginPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState([])
   const context = useContext(UserContext)
   const history = useHistory()
   
@@ -29,7 +30,7 @@ const LoginPage = () => {
         context.logIn(user)
         history.push('/')
       }, (e) => {
-        console.log('Error', e)
+        setErrors(['Invalid login credentials'])
       }
     )
   }
@@ -54,6 +55,7 @@ const LoginPage = () => {
           />
           <Submit value="Login" />
       </form>
+      {errors.length > 0 ? <Notification messages={errors}/> : null}
       <div className={styles["register-redirect"]}>
         Dont have an account? <Link to="/register">Register</Link>
       </div>

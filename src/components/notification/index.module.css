@@ -1,0 +1,16 @@
+.notification {
+    width: 35%;
+    margin: 2vh;
+    padding: 2vh 0;
+    background: palevioletred;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.message {
+    font-size: 24px;
+    font-weight: 400;
+    color: white;
+}

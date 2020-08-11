@@ -9,11 +9,14 @@ import FormTitle from '../../../components/form-title'
 import authenticate from '../../../utils/authenticate'
 import UserContext from '../../../Context'
 
+import Notification from '../../../components/notification'
+
 class RegisterPage extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      errors: [],
       username: "",
       password: "",
       rePassword: ""
@@ -36,6 +39,16 @@ class RegisterPage extends Component {
       password
     } = this.state
 
+    if (this.state.password !== this.state.rePassword) {
+      const errSnapshot = this.state.errors
+      if(errSnapshot.indexOf('Passwords do not match') === -1) {
+        errSnapshot.push('Passwords do not match')
+        this.setState({errors: errSnapshot})
+      }
+    }
+
+    if(this.state.errors.length > 0) return
+
     await authenticate('http://localhost:9999/api/user/register', {
         username,
         password
@@ -43,9 +56,14 @@ class RegisterPage extends Component {
         this.context.logIn(user)
         this.props.history.push('/')
       }, (e) => {
-        console.log('Error', e)
+        const errSnapshot = this.state.errors
+        if(errSnapshot.indexOf('Username taken') === -1) {
+          errSnapshot.push('Username taken')
+          this.setState({errors: errSnapshot})
+        }
       }
     )
+
   }
 
   render() {
@@ -85,6 +103,7 @@ class RegisterPage extends Component {
               />
               <Submit value="Register" />
           </form>
+          {this.state.errors.length > 0 ? <Notification messages={this.state.errors}/> : null}
           <div className={styles["register-redirect"]}>
             Already have an account? <Link to="/login">Login</Link>
           </div>
