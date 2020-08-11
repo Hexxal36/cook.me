@@ -25,11 +25,11 @@ const ImageUpload = ({src, onUpload}) => {
 
     useEffect(() => {
         setImgUrl(src)
-    })
+    }, [src])
 
     return (
         <div className={styles["img-upload"]}>
-            {imgUrl ? <img src={imgUrl} /> : null}
+            {imgUrl ? <img alt="" src={imgUrl} /> : null}
             <Button value="Upload an image" onClick={e => openWidget(e)}/>
         </div>
     )
