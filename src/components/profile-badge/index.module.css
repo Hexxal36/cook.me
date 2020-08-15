@@ -90,3 +90,7 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.modal img {
+    width: 22%;
+}
