@@ -9,6 +9,7 @@ Cookme is a platform designed to give users the ability to share their recipes w
 3. Start the web server by using the 'npm start' command. The app will be served at http://localhost:3000/
 4. Install the dependencies in the restapi folder using 'npm i'
 5. Setup your MongoAtlas db by editing the dbUrl in ./restapi/config/config.js
+6. Install 'nodemon' globaly by using 'npm i -g nodemon' for the next step or use 'npm start' and skip it
 6. Start the backend web server by using the 'nodemon' command in the restapi folder of the project
 7. Go to http://localhost:3000/ and start creating your recipes
 
